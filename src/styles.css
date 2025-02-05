@@ -17,11 +17,39 @@ body {
   align-items: center;
   min-height: 100dvh;
   padding: 0 8px;
+  color: rgb(41, 41, 41);
 }
 
 header {
-  margin-top: 8px;
-  margin-bottom: 100px;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  margin-top: 12px;
+  margin-bottom: 50px;
+}
+
+header input {
+  border: none;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  padding: 4px 10px;
+  background-color: #f0f0f0;
+}
+header input:focus {
+  outline-color: #b3b3b3;
+}
+
+header button {
+  border-top-right-radius: 8px;
+  background-color: #dddddd;
+  padding: 10px;
+  border-bottom-right-radius: 8px;
+  border: none;
+}
+header button:hover {
+  cursor: pointer;
+  color: white;
+  background-color: rgb(59, 59, 59);
 }
 
 main {
@@ -33,8 +61,8 @@ main {
 }
 
 footer {
-  margin-top: 100px;
-  margin-bottom: 8px;
+  margin-top: 50px;
+  margin-bottom: 12px;
 }
 
 /* Resolved address */
@@ -65,12 +93,76 @@ footer {
   font-size: xx-large;
 }
 
+.current-data-container div:last-child {
+  font-size: x-large;
+}
 /* Weather summary */
 .weather-summary {
   font-style: italic;
   text-align: center;
 }
 
+/* Today future data */
+.today-future-data {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+
+  text-align: center;
+  padding: 20px;
+  margin: 20px;
+  background-color: rgb(230, 229, 229);
+  border-radius: 8px;
+}
+
+.card img {
+  width: 85px;
+  height: 85px;
+}
+
+.card div:nth-child(2),
+.card div:nth-child(6) {
+  margin-bottom: 20px;
+}
+
+.card div:nth-child(2) {
+  font-style: italic;
+}
+
+.card div:first-child {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.card div:last-child {
+  font-weight: 500;
+}
+
+@media (max-width: 1462px) {
+  .today-future-data {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .today-future-data {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 500px) {
+  .today-future-data {
+    grid-template-columns: 1fr;
+  }
+}
 @media (max-width: 375px) {
   .current-conditions {
     flex-direction: column;

@@ -11,34 +11,34 @@ const App = (async () => {
   );
   initialState.constructDom();
   const userInputState = async () => {
-      try {
-        const userInput = document.getElementById("locationInput");
-        userInput.setCustomValidity("");
+    try {
+      const userInput = document.getElementById("locationInput");
+      userInput.setCustomValidity("");
 
-        if (userInput.value === "") {
-          userInput.setCustomValidity("Value missing");
-          userInput.reportValidity();
-          return;
-        }
-
-        const inputValue = userInput.value;
-        const apiQuery = await fetchData(API_KEY, inputValue);
-
-        if (apiQuery instanceof Error) {
-          throw apiQuery.message;
-        }
-
-        const weatherDataObject = new WeatherData(apiQuery);
-
-        const domHandlerObject = new DomHandler(weatherDataObject);
-        domHandlerObject.constructDom();
-      } catch (error) {
-        document
-          .getElementById("locationInput")
-          .setCustomValidity(new Error(error));
-        document.getElementById("locationInput").reportValidity();
+      if (userInput.value === "") {
+        userInput.setCustomValidity("Value missing");
+        userInput.reportValidity();
+        return;
       }
-    };
+
+      const inputValue = userInput.value;
+      const apiQuery = await fetchData(API_KEY, inputValue);
+
+      if (apiQuery instanceof Error) {
+        throw apiQuery.message;
+      }
+
+      const weatherDataObject = new WeatherData(apiQuery);
+
+      const domHandlerObject = new DomHandler(weatherDataObject);
+      domHandlerObject.constructDom();
+    } catch (error) {
+      document
+        .getElementById("locationInput")
+        .setCustomValidity(new Error(error));
+      document.getElementById("locationInput").reportValidity();
+    }
+  };
 
   document.getElementById("locationInput").addEventListener("input", () => {
     const userInput = document.getElementById("locationInput");
@@ -54,13 +54,13 @@ const App = (async () => {
     .getElementById("buttonSearch")
     .addEventListener("click", userInputState);
 
-  document.getElementById("locationInput").addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-      userInputState();
-    }
-  })
+  document
+    .getElementById("locationInput")
+    .addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        userInputState();
+      }
+    });
 })();
 
-// const weatherDataObject = new WeatherData(data);
-
-// console.log(weatherDataObject);
+console.log(await fetchData("XJ35PSQF5SN7BMRES7YCDAC4G", "indonesia"));

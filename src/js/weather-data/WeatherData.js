@@ -5,12 +5,14 @@ export default class WeatherData {
   #weatherSummary;
   #currentConditions;
   #todayFutureWeatherDataArray;
+  #timezone;
 
   constructor(jsonData) {
     this.#address = jsonData.resolvedAddress;
     this.#weatherSummary = jsonData.description;
     this.#currentConditions = new CurrentConditions(jsonData.currentConditions);
     this.#todayFutureWeatherDataArray = jsonData.days;
+    this.#timezone = jsonData.timezone;
   }
 
   get address() {
@@ -46,5 +48,13 @@ export default class WeatherData {
 
   set todayFutureWeatherDataArray(todayFutureWeatherDataArray) {
     this.#todayFutureWeatherDataArray = todayFutureWeatherDataArray;
+  }
+
+  get timezone() {
+    return this.#timezone;
+  }
+
+  set timezone(timezone) {
+    this.#timezone = timezone;
   }
 }
