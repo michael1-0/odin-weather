@@ -1,5 +1,9 @@
+import Loader from "./dom/Loader";
+
 export default async function fetchData(API_KEY, location) {
+  const loaderz = new Loader();
   try {
+    loaderz.showLoader();
     const response = await fetch(
       `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?key=${API_KEY}&unitGroup=metric`,
     );
@@ -24,5 +28,7 @@ export default async function fetchData(API_KEY, location) {
     return responseJson;
   } catch (error) {
     return new Error(error);
+  } finally {
+    loaderz.hideLoader();
   }
 }

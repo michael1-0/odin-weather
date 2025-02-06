@@ -1,12 +1,12 @@
-import snowSvg from "../img/snow.svg";
-import rainSvg from "../img/rain.svg";
-import fogSvg from "../img/fog.svg";
-import windSvg from "../img/wind.svg";
-import cloudySvg from "../img/cloudy.svg";
-import partlyCloudyDaySvg from "../img/partly-cloudy-day.svg";
-import partlyCloudyNightSvg from "../img/partly-cloudy-night.svg";
-import clearDaySvg from "../img/clear-day.svg";
-import clearNightSvg from "../img/clear-night.svg";
+import snowSvg from "../../img/snow.svg";
+import rainSvg from "../../img/rain.svg";
+import fogSvg from "../../img/fog.svg";
+import windSvg from "../../img/wind.svg";
+import cloudySvg from "../../img/cloudy.svg";
+import partlyCloudyDaySvg from "../../img/partly-cloudy-day.svg";
+import partlyCloudyNightSvg from "../../img/partly-cloudy-night.svg";
+import clearDaySvg from "../../img/clear-day.svg";
+import clearNightSvg from "../../img/clear-night.svg";
 
 export default class DomHandler {
   constructor(weatherData) {

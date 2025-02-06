@@ -2,7 +2,7 @@ import "./css/reset.css";
 import "./styles.css";
 import fetchData from "./js/api";
 import WeatherData from "./js/weather-data/WeatherData";
-import DomHandler from "./js/DomHandler";
+import DomHandler from "./js/dom/DomHandler";
 
 const App = (async () => {
   const API_KEY = "XJ35PSQF5SN7BMRES7YCDAC4G";
@@ -63,4 +63,4 @@ const App = (async () => {
     });
 })();
 
-console.log(await fetchData("XJ35PSQF5SN7BMRES7YCDAC4G", "indonesia"));
+console.log(await fetchData("XJ35PSQF5SN7BMRES7YCDAC4G", "iceland"));
