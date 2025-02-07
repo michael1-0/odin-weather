@@ -60,7 +60,22 @@ export default class DomHandler {
     divFeelsLike.textContent = `Feels like ${this.weatherData.currentConditions.feelsLike} °C`;
 
     const divTime = document.createElement("div");
+    divTime.classList.add("time-timezone");
     divTime.textContent = this.determineTime(this.weatherData.timezone);
+
+    // If precip exists
+    if (!(this.weatherData.currentConditions.precipType === null)) {
+      const divPrecipProb = document.createElement("div");
+      divPrecipProb.textContent = `${this.weatherData.currentConditions.precipProb}% of ${this.weatherData.currentConditions.precipType.join(", ")} to happen`;
+      containerCurrentData.append(divConditions, divTemp, divFeelsLike, divTime, divPrecipProb);
+
+      this.currentConditionsContainer.append(
+        imgCurrentConditions,
+        containerCurrentData,
+      );
+
+      return;
+    }
 
     containerCurrentData.append(divConditions, divTemp, divFeelsLike, divTime);
 

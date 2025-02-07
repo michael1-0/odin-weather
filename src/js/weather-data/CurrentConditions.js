@@ -3,12 +3,16 @@ export default class CurrentConditions {
   #temp;
   #conditions;
   #feelsLike;
+  #precipProb;
+  #precipType;
 
   constructor(currentConditionsObject) {
     this.#icon = currentConditionsObject.icon;
     this.#conditions = currentConditionsObject.conditions;
     this.#temp = currentConditionsObject.temp;
     this.#feelsLike = currentConditionsObject.feelslike;
+    this.#precipProb = currentConditionsObject.precipprob;
+    this.#precipType = currentConditionsObject.preciptype;
   }
 
   get icon() {
@@ -41,5 +45,21 @@ export default class CurrentConditions {
 
   set feelsLike(feelsLike) {
     this.#feelsLike = feelsLike;
+  }
+
+  get precipProb() {
+    return this.#precipProb;
+  }
+
+  set precipProb(precipProb) {
+    this.#precipProb = precipProb;
+  }
+
+  get precipType() {
+    return this.#precipType;
+  }
+
+  set precipType(precipType) {
+    this.#precipType = precipType;
   }
 }

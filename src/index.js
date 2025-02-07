@@ -62,3 +62,5 @@ const App = (async () => {
       }
     });
 })();
+
+console.log(await fetchData("XJ35PSQF5SN7BMRES7YCDAC4G", "laweyan"));

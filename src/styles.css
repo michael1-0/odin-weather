@@ -95,7 +95,7 @@ footer {
   font-size: xx-large;
 }
 
-.current-data-container div:last-child {
+.current-data-container .time-timezone {
   font-size: x-large;
 }
 /* Weather summary */
