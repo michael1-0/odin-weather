@@ -66,7 +66,7 @@ export default class DomHandler {
     // If precip exists
     if (!(this.weatherData.currentConditions.precipType === null)) {
       const divPrecipProb = document.createElement("div");
-      divPrecipProb.textContent = `${this.weatherData.currentConditions.precipProb}% of ${this.weatherData.currentConditions.precipType.join(", ")} to happen`;
+      divPrecipProb.textContent = `${this.weatherData.currentConditions.precipProb}% chance of ${this.weatherData.currentConditions.precipType.join(", ")} to happen`;
       containerCurrentData.append(divConditions, divTemp, divFeelsLike, divTime, divPrecipProb);
 
       this.currentConditionsContainer.append(
