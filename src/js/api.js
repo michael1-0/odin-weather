@@ -1,12 +1,17 @@
 import Loader from "./dom/Loader";
 
-export default async function fetchData(API_KEY, location) {
+export default async function fetchData(API_KEY, location, unit = "celsius") {
   const loaderz = new Loader();
+  let url;
+  if (unit === "celsius") {
+    url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?key=${API_KEY}&unitGroup=metric`;
+  } else {
+    url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?key=${API_KEY}&unitGroup=us`;
+  }
+
   try {
     loaderz.showLoader();
-    const response = await fetch(
-      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?key=${API_KEY}&unitGroup=metric`,
-    );
+    const response = await fetch(url);
 
     switch (response.status) {
       case 500:

@@ -6,13 +6,16 @@ export default class WeatherData {
   #currentConditions;
   #todayFutureWeatherDataArray;
   #timezone;
+  #isMetric;
 
-  constructor(jsonData) {
+  constructor(jsonData, unitInput = "celsius") {
     this.#address = jsonData.resolvedAddress;
     this.#weatherSummary = jsonData.description;
     this.#currentConditions = new CurrentConditions(jsonData.currentConditions);
     this.#todayFutureWeatherDataArray = jsonData.days;
     this.#timezone = jsonData.timezone;
+    if (unitInput === "celsius") this.#isMetric = true;
+    else this.#isMetric = false;
   }
 
   get address() {
@@ -56,5 +59,13 @@ export default class WeatherData {
 
   set timezone(timezone) {
     this.#timezone = timezone;
+  }
+
+  get isMetric() {
+    return this.#isMetric;
+  }
+
+  set isMetric(isMetric) {
+    this.#isMetric = isMetric;
   }
 }

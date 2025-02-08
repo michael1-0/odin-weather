@@ -22,13 +22,20 @@ const App = (async () => {
       }
 
       const inputValue = userInput.value;
-      const apiQuery = await fetchData(API_KEY, inputValue);
+      const apiQuery = await fetchData(
+        API_KEY,
+        inputValue,
+        document.getElementById("unit").value,
+      );
 
       if (apiQuery instanceof Error) {
         throw apiQuery.message;
       }
 
-      const weatherDataObject = new WeatherData(apiQuery);
+      const weatherDataObject = new WeatherData(
+        apiQuery,
+        document.getElementById("unit").value,
+      );
 
       const domHandlerObject = new DomHandler(weatherDataObject);
       domHandlerObject.constructDom();

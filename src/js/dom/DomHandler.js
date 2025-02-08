@@ -20,6 +20,7 @@ export default class DomHandler {
     this.weatherSummaryContainer = document.querySelector(".weather-summary");
     this.todayFutureDataContainer =
       document.querySelector(".today-future-data");
+    this.addUnitChangeListener();
   }
 
   constructDom() {
@@ -28,6 +29,78 @@ export default class DomHandler {
     this.constructCurrentConditions();
     this.constructWeatherSummary();
     this.constructTodayFutureData();
+  }
+
+  addUnitChangeListener() {
+    const selectUnit = document.getElementById("unit");
+    selectUnit.addEventListener("change", (event) => {
+      const selectedValue = event.target.value;
+
+      if (selectedValue === "fahrenheit") {
+        this.weatherData.currentConditions.temp =
+          this.convertCelsiusToFahrenheit(
+            this.weatherData.currentConditions.temp,
+          );
+        this.weatherData.currentConditions.feelsLike =
+          this.convertCelsiusToFahrenheit(
+            this.weatherData.currentConditions.feelsLike,
+          );
+
+        for (let i = 0; i < 6; i++) {
+          const data = this.weatherData.todayFutureWeatherDataArray[i];
+
+          data.tempmin = this.convertCelsiusToFahrenheit(data.tempmin);
+          data.temp = this.convertCelsiusToFahrenheit(data.temp);
+          data.tempmax = this.convertCelsiusToFahrenheit(data.tempmax);
+        }
+
+        this.weatherData.isMetric = false;
+        this.constructDom();
+      } else {
+        //
+        this.weatherData.currentConditions.temp =
+          this.convertFahrenheitToCelsius(
+            this.weatherData.currentConditions.temp,
+          );
+        this.weatherData.currentConditions.feelsLike =
+          this.convertFahrenheitToCelsius(
+            this.weatherData.currentConditions.feelsLike,
+          );
+
+        for (let i = 0; i < 6; i++) {
+          const data = this.weatherData.todayFutureWeatherDataArray[i];
+
+          data.tempmin = this.convertFahrenheitToCelsius(data.tempmin);
+          data.temp = this.convertFahrenheitToCelsius(data.temp);
+          data.tempmax = this.convertFahrenheitToCelsius(data.tempmax);
+        }
+
+        this.weatherData.isMetric = true;
+        this.constructDom();
+      }
+    });
+  }
+
+  convertCelsiusToFahrenheit(celsius) {
+    const fahrenheit = (celsius * 9) / 5 + 32;
+    // Check if the result is an integer or has a trailing .0
+    if (fahrenheit % 1 === 0) {
+      return fahrenheit;
+    } else {
+      const roundedFahrenheit = fahrenheit.toFixed(2);
+      return parseFloat(roundedFahrenheit);
+    }
+  }
+
+  convertFahrenheitToCelsius(fahrenheit) {
+    const celsius = ((fahrenheit - 32) * 5) / 9;
+    // Check if the result is an integer or has a trailing .0
+    if (celsius % 1 === 0) {
+      return celsius;
+    } else {
+      const roundedCelsius = celsius.toFixed(2);
+      return parseFloat(roundedCelsius);
+    }
   }
 
   constructResolvedAddress() {
@@ -53,11 +126,16 @@ export default class DomHandler {
 
     const divTemp = document.createElement("div");
     divTemp.classList.add("value");
-    divTemp.textContent = `${this.weatherData.currentConditions.temp} °C`;
+    if (this.weatherData.isMetric === true)
+      divTemp.textContent = `${this.weatherData.currentConditions.temp} °C`;
+    else divTemp.textContent = `${this.weatherData.currentConditions.temp} °F`;
 
     const divFeelsLike = document.createElement("div");
     divFeelsLike.classList.add("value");
-    divFeelsLike.textContent = `Feels like ${this.weatherData.currentConditions.feelsLike} °C`;
+    if (this.weatherData.isMetric === true)
+      divFeelsLike.textContent = `Feels like ${this.weatherData.currentConditions.feelsLike} °C`;
+    else
+      divFeelsLike.textContent = `Feels like ${this.weatherData.currentConditions.feelsLike} °F`;
 
     const divTime = document.createElement("div");
     divTime.classList.add("time-timezone");
@@ -67,7 +145,13 @@ export default class DomHandler {
     if (!(this.weatherData.currentConditions.precipType === null)) {
       const divPrecipProb = document.createElement("div");
       divPrecipProb.textContent = `${this.weatherData.currentConditions.precipProb}% chance of ${this.weatherData.currentConditions.precipType.join(", ")} to happen`;
-      containerCurrentData.append(divConditions, divTemp, divFeelsLike, divTime, divPrecipProb);
+      containerCurrentData.append(
+        divConditions,
+        divTemp,
+        divFeelsLike,
+        divTime,
+        divPrecipProb,
+      );
 
       this.currentConditionsContainer.append(
         imgCurrentConditions,
@@ -112,15 +196,21 @@ export default class DomHandler {
 
       const divMinTemp = document.createElement("div");
       divMinTemp.classList.add("value");
-      divMinTemp.textContent = `Min Temp: ${data.tempmin} °C`;
+      if (this.weatherData.isMetric === true)
+        divMinTemp.textContent = `Min Temp: ${data.tempmin} °C`;
+      else divMinTemp.textContent = `Min Temp: ${data.tempmin} °F`;
 
       const divAvgTemp = document.createElement("div");
       divAvgTemp.classList.add("value");
-      divAvgTemp.textContent = `Avg Temp: ${data.temp} °C`;
+      if (this.weatherData.isMetric === true)
+        divAvgTemp.textContent = `Avg Temp: ${data.temp} °C`;
+      else divAvgTemp.textContent = `Avg Temp: ${data.temp} °F`;
 
       const divMaxTemp = document.createElement("div");
       divMaxTemp.classList.add("value");
-      divMaxTemp.textContent = `Max Temp: ${data.tempmax} °C`;
+      if (this.weatherData.isMetric === true)
+        divMaxTemp.textContent = `Max Temp: ${data.tempmax} °C`;
+      else divMaxTemp.textContent = `Max Temp: ${data.tempmax} °F`;
 
       const divDate = document.createElement("div");
       divDate.textContent = data.datetime;
