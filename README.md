@@ -1,9 +1,6 @@
 # Webpack Template with ESLint and Prettier
-This is a basic Webpack template configured with ESLint and Prettier. 
+This is a project from The Odin Project, the goal of this project is to practice Javascript Asynchronous Javscript and fetching of Visual Crossing Weather API.
 
-To use this template run `npm pkg set name="your-project-name" && npm install`  
+I used Webpack for bundling, ESLint for linting, and Prettier for formatting.
 
-
-## Usage
-`npm run build` to build  
-`npm run dev` to host a local server
+ES6 Classes, modules are used to organize code; I put DOM logic classes inside the folder `src/js/dom` and the weather data processing inside `src/js/weather-data`.
