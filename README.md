@@ -1,4 +1,4 @@
-# Webpack Template with ESLint and Prettier
+# Weather App Using Visual Crossing Weather API
 This is a project from The Odin Project, the goal of this project is to practice Javascript Asynchronous Javscript and fetching of Visual Crossing Weather API.
 
 I used Webpack for bundling, ESLint for linting, and Prettier for formatting.
